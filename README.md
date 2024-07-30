@@ -1,6 +1,6 @@
 # Email Analyzer
 
-Email Analyzer is a user-friendly web application that helps you improve your emails. It analyzes your emails for professionalism and effectiveness, providing detailed feedback on various aspects of your writing.
+Email Analyzer is a user-friendly web application that helps you improve your emails. It analyzes your emails for effectiveness and professionalism, providing detailed feedback on various aspects of your writing, regardless of the email's purpose (e.g., sales, customer service, internal communication, etc.).
 
 ## What You'll Need
 
@@ -54,7 +54,7 @@ Follow these steps to set up the Email Analyzer on your computer:
 
 6. Download the AI model:
    ```
-   ollama pull llama2
+   ollama pull llama3.1
    ```
 
 ## Running the Application
@@ -95,10 +95,10 @@ You'll need to use two separate command prompt or terminal windows:
 ## Using the Email Analyzer
 
 1. Open a web browser and go to `http://localhost:5000`
-2. You'll see a text box where you can paste your sales email.
+2. You'll see a text box where you can paste your email content.
 3. Click the "Analyze" button to submit your email for analysis.
 4. Wait a few moments for the AI to analyze your email.
-5. Review the feedback provided, covering aspects like tone, clarity, and structure.
+5. Review the feedback provided, covering aspects like purpose clarity, tone, structure, and more.
 6. Use the suggestions to improve your email.
 
 ## Customization
