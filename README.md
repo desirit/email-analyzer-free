@@ -20,7 +20,7 @@ Email Analyzer is a web application that uses Ollama with LLaMA or Mistral model
 
 1. Clone the repository or download the source code:
    ```
-   git clone https://github.com/yourusername/email-analyzer.git
+   git clone https://github.com/desirit/email-analyzer.git
    cd email-analyzer
    ```
 
