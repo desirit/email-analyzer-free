@@ -8,7 +8,7 @@ import requests
 app = Flask(__name__)
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "llama2"  # or "mistral" if you prefer
+MODEL_NAME = "llama3.1"  # or "mistral" if you prefer
 
 # HTML templates as strings with improved styling
 INDEX_TEMPLATE = """
@@ -188,24 +188,25 @@ def analyze_email():
         email_content = request.form["email_content"]
 
         try:
-            # Improved prompt for more comprehensive analysis
+            # Generalized prompt for comprehensive email analysis
             prompt = (
-                "Please analyze the following sales email for professionalism and effectiveness. "
+                "Please analyze the following email for effectiveness and professionalism. "
                 "Provide a comprehensive evaluation covering the following aspects:\n\n"
                 "1. Overall Impression: Give a brief summary of the email's effectiveness.\n"
-                "2. Tone and Professionalism: Assess the email's tone. Is it appropriate for a business context?\n"
-                "3. Clarity and Coherence: Evaluate how well the message is communicated. Is it easy to understand?\n"
-                "4. Structure and Organization: Comment on the email's layout and flow of information.\n"
-                "5. Opening and Closing: Analyze the effectiveness of the email's introduction and conclusion.\n"
-                "6. Call-to-Action: Is there a clear next step for the recipient? How compelling is it?\n"
-                "7. Personalization: Does the email feel tailored to the recipient?\n"
-                "8. Grammar and Spelling: Note any errors or areas for improvement.\n"
-                "9. Length and Conciseness: Is the email appropriately brief while still conveying all necessary information?\n"
-                "10. Suggestions for Improvement: Provide specific recommendations to enhance the email's effectiveness.\n\n"
-                f"Here's the email content:\n\n{email_content}\n\n"
+                "2. Purpose Clarity: Is the main purpose or intent of the email clear?\n"
+                "3. Tone and Professionalism: Assess the email's tone. Is it appropriate for its context?\n"
+                "4. Clarity and Coherence: Evaluate how well the message is communicated. Is it easy to understand?\n"
+                "5. Structure and Organization: Comment on the email's layout and flow of information.\n"
+                "6. Opening and Closing: Analyze the effectiveness of the email's introduction and conclusion.\n"
+                "7. Key Points: Are the main points or requests clearly presented?\n"
+                "8. Call-to-Action: If applicable, is there a clear next step for the recipient? How compelling is it?\n"
+                "9. Personalization: Does the email feel appropriately tailored to the recipient?\n"
+                "10. Grammar and Spelling: Note any errors or areas for improvement.\n"
+                "11. Length and Conciseness: Is the email appropriately brief while still conveying all necessary information?\n"
+                "12. Suggestions for Improvement: Provide specific recommendations to enhance the email's effectiveness.\n\n"
+                "Here's the email content:\n\n{0}\n\n"
                 "Please provide your analysis in a structured format, addressing each of the points above."
-            )
-
+            ).format(email_content)
 
             # Call Ollama API for analysis
             response = requests.post(OLLAMA_URL, json={
@@ -219,11 +220,14 @@ def analyze_email():
 
             return render_template_string(RESULT_TEMPLATE, analysis=analysis)
         except Exception as e:
-            error_message = f"An error occurred: {str(e)}\n\nTraceback:\n{''.join(traceback.format_tb(e.__traceback__))}"
+            error_message = "An error occurred: {0}\n\nTraceback:\n{1}".format(
+                str(e), ''.join(traceback.format_tb(e.__traceback__))
+            )
             print(error_message, file=sys.stderr)
             return render_template_string(ERROR_TEMPLATE, error_message=error_message), 500
 
     return render_template_string(INDEX_TEMPLATE)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
