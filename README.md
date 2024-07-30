@@ -26,7 +26,7 @@ Email Analyzer is a web application that uses Ollama with LLaMA or Mistral model
 
 2. It's recommended to create a virtual environment:
    ```
-   python -m venv venv
+   python3 -m venv venv  # Make sure to use Python 3 and not Python 2.7
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
 
