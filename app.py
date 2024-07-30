@@ -186,29 +186,26 @@ ERROR_TEMPLATE = """
 def analyze_email():
     if request.method == "POST":
         email_content = request.form["email_content"]
-        
+
         try:
             # Improved prompt for more comprehensive analysis
-            prompt = f"""
-            Please analyze the following sales email for professionalism and effectiveness. Provide a comprehensive evaluation covering the following aspects:
+            prompt = (
+                "Please analyze the following sales email for professionalism and effectiveness. "
+                "Provide a comprehensive evaluation covering the following aspects:\n\n"
+                "1. Overall Impression: Give a brief summary of the email's effectiveness.\n"
+                "2. Tone and Professionalism: Assess the email's tone. Is it appropriate for a business context?\n"
+                "3. Clarity and Coherence: Evaluate how well the message is communicated. Is it easy to understand?\n"
+                "4. Structure and Organization: Comment on the email's layout and flow of information.\n"
+                "5. Opening and Closing: Analyze the effectiveness of the email's introduction and conclusion.\n"
+                "6. Call-to-Action: Is there a clear next step for the recipient? How compelling is it?\n"
+                "7. Personalization: Does the email feel tailored to the recipient?\n"
+                "8. Grammar and Spelling: Note any errors or areas for improvement.\n"
+                "9. Length and Conciseness: Is the email appropriately brief while still conveying all necessary information?\n"
+                "10. Suggestions for Improvement: Provide specific recommendations to enhance the email's effectiveness.\n\n"
+                f"Here's the email content:\n\n{email_content}\n\n"
+                "Please provide your analysis in a structured format, addressing each of the points above."
+            )
 
-            1. Overall Impression: Give a brief summary of the email's effectiveness.
-            2. Tone and Professionalism: Assess the email's tone. Is it appropriate for a business context?
-            3. Clarity and Coherence: Evaluate how well the message is communicated. Is it easy to understand?
-            4. Structure and Organization: Comment on the email's layout and flow of information.
-            5. Opening and Closing: Analyze the effectiveness of the email's introduction and conclusion.
-            6. Call-to-Action: Is there a clear next step for the recipient? How compelling is it?
-            7. Personalization: Does the email feel tailored to the recipient?
-            8. Grammar and Spelling: Note any errors or areas for improvement.
-            9. Length and Conciseness: Is the email appropriately brief while still conveying all necessary information?
-            10. Suggestions for Improvement: Provide specific recommendations to enhance the email's effectiveness.
-
-            Here's the email content:
-
-            {email_content}
-
-            Please provide your analysis in a structured format, addressing each of the points above.
-            """
 
             # Call Ollama API for analysis
             response = requests.post(OLLAMA_URL, json={
@@ -217,15 +214,15 @@ def analyze_email():
                 "stream": False
             })
             response.raise_for_status()
-            
+
             analysis = response.json()["response"]
-            
+
             return render_template_string(RESULT_TEMPLATE, analysis=analysis)
         except Exception as e:
             error_message = f"An error occurred: {str(e)}\n\nTraceback:\n{''.join(traceback.format_tb(e.__traceback__))}"
             print(error_message, file=sys.stderr)
             return render_template_string(ERROR_TEMPLATE, error_message=error_message), 500
-    
+
     return render_template_string(INDEX_TEMPLATE)
 
 if __name__ == "__main__":
