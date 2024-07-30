@@ -1,102 +1,126 @@
 # Email Analyzer
 
-Email Analyzer is a web application that uses Ollama with LLaMA or Mistral models to analyze sales emails for professionalism and effectiveness. It provides a comprehensive evaluation of various aspects of the email, helping sales professionals improve their email communication.
+Email Analyzer is a user-friendly web application that helps you improve your sales emails. It analyzes your emails for professionalism and effectiveness, providing detailed feedback on various aspects of your writing.
 
-## Features
+## What You'll Need
 
-- Analyzes sales emails for tone, clarity, structure, and effectiveness
-- Provides detailed feedback on multiple aspects of the email
-- Simple and intuitive web interface
-- Powered by Ollama with LLaMA or Mistral models
+Before you start, make sure you have the following software installed on your computer:
 
-## Requirements
+1. **Git**: This helps you download the project files.
+   - Download from: https://git-scm.com/downloads
+   - Installation guide: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
-- Python 3.7+
-- Flask
-- Requests library
-- Ollama installed and running locally
+2. **Python 3**: This is the programming language the application uses.
+   - Download from: https://www.python.org/downloads/
+   - Choose Python 3.7 or later
+   - Installation guide: https://wiki.python.org/moin/BeginnersGuide/Download
 
-## Setup
+3. **Ollama**: This runs the AI model that analyzes your emails.
+   - Download from: https://ollama.ai/download
+   - Follow the installation instructions on the website
 
-1. Clone the repository or download the source code:
+## Setting Up the Application
+
+Follow these steps to set up the Email Analyzer on your computer:
+
+1. Open a command prompt or terminal on your computer.
+
+2. Download the project files:
    ```
-   git clone https://github.com/desirit/email-analyzer.git
+   git clone https://github.com/yourusername/email-analyzer.git
+   ```
+
+3. Navigate to the project folder:
+   ```
    cd email-analyzer
    ```
 
-2. It's recommended to create a virtual environment:
-   ```
-   python3 -m venv venv  # Make sure to use Python 3 and not Python 2.7
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
+4. Create a virtual environment (this keeps the project separate from other Python projects):
+   - On Windows:
+     ```
+     python -m venv venv
+     venv\Scripts\activate
+     ```
+   - On macOS or Linux:
+     ```
+     python3 -m venv venv
+     source venv/bin/activate
+     ```
 
-3. Install the required Python packages using the `requirements.txt` file:
+5. Install the required Python packages:
    ```
    pip install -r requirements.txt
    ```
 
-4. Install Ollama by following the instructions at [Ollama's official website](https://ollama.ai/).
-
-5. Pull the LLaMA2 or Mistral model using Ollama:
+6. Download the AI model:
    ```
    ollama pull llama2
-   # or
-   ollama pull mistral
-   ```
-
-6. Start the Ollama server:
-   ```
-   ollama serve
    ```
 
 ## Running the Application
 
-1. Ensure you're in the project directory and your virtual environment is activated.
+You'll need to use two separate command prompt or terminal windows:
 
-2. Make sure the Ollama server is running.
+### Window 1: Starting Ollama
 
-3. Run the Flask application:
+1. Open a new command prompt or terminal window.
+2. Start the Ollama server:
+   ```
+   ollama serve
+   ```
+3. Keep this window open and running.
+
+### Window 2: Running the Email Analyzer
+
+1. Open another command prompt or terminal window.
+2. Navigate to your project folder (if you're not already there):
+   ```
+   cd path/to/email-analyzer
+   ```
+3. Activate the virtual environment:
+   - On Windows:
+     ```
+     venv\Scripts\activate
+     ```
+   - On macOS or Linux:
+     ```
+     source venv/bin/activate
+     ```
+4. Run the Flask application:
    ```
    python app.py
    ```
+5. You should see a message saying the server is running.
 
-4. Open a web browser and go to `http://localhost:5000` to access the application.
+## Using the Email Analyzer
 
-## Usage
-
-1. On the home page, you'll see a text area where you can paste your sales email content.
-
-2. Click the "Analyze" button to submit the email for analysis.
-
-3. The application will send the email to the Ollama API for processing and display the results on a new page.
-
-4. The analysis will cover the following aspects of your email:
-   - Overall Impression
-   - Tone and Professionalism
-   - Clarity and Coherence
-   - Structure and Organization
-   - Opening and Closing
-   - Call-to-Action
-   - Personalization
-   - Grammar and Spelling
-   - Length and Conciseness
-   - Suggestions for Improvement
-
-5. Review the analysis and use the feedback to improve your email.
-
-6. Click "Analyze Another Email" to return to the home page and analyze another email.
+1. Open a web browser and go to `http://localhost:5000`
+2. You'll see a text box where you can paste your sales email.
+3. Click the "Analyze" button to submit your email for analysis.
+4. Wait a few moments for the AI to analyze your email.
+5. Review the feedback provided, covering aspects like tone, clarity, and structure.
+6. Use the suggestions to improve your email.
 
 ## Customization
 
-You can modify the `app.py` file to customize the application:
+If you're comfortable with coding, you can modify the `app.py` file to customize the application:
 
-- Adjust the HTML templates to change the appearance of the web pages.
-- Modify the prompt in the `analyze_email()` function to change the aspects of the email being analyzed.
-- Change the Ollama model by modifying the `MODEL_NAME` variable (e.g., "llama2" or "mistral").
+- Change the appearance by editing the HTML templates.
+- Modify the analysis criteria by adjusting the prompt in the `analyze_email()` function.
+- Switch to a different AI model by changing the `MODEL_NAME` variable (e.g., from "llama2" to "mistral").
+
+## Troubleshooting
+
+If you encounter any issues:
+1. Make sure both Ollama and the Flask application are running in separate windows.
+2. Check that you've installed all required software and followed the setup steps.
+3. Try restarting both Ollama and the Flask application.
+
+If problems persist, feel free to open an issue on the GitHub repository.
 
 ## Security Note
 
-This application is a basic example and may not be suitable for production use without additional security measures. Ensure you implement proper security practices, such as input validation and protection against common web vulnerabilities, before deploying this application in a production environment.
+This application is a basic example and may not be suitable for sensitive or confidential information. Use it responsibly and avoid sharing private data.
 
 ## License
 
@@ -104,4 +128,4 @@ This project is open-source and available under the MIT License.
 
 ## Acknowledgments
 
-This application uses Ollama with LLaMA or Mistral models to provide AI-powered email analysis.
+This application uses Ollama with the LLaMA model to provide AI-powered email analysis.
