@@ -1,6 +1,6 @@
 # Email Analyzer
 
-Email Analyzer is a user-friendly web application that helps you improve your sales emails. It analyzes your emails for professionalism and effectiveness, providing detailed feedback on various aspects of your writing.
+Email Analyzer is a user-friendly web application that helps you improve your emails. It analyzes your emails for professionalism and effectiveness, providing detailed feedback on various aspects of your writing.
 
 ## What You'll Need
 
